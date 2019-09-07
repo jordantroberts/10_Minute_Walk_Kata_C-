@@ -13,30 +13,16 @@ namespace TenMinWalkTests
             walk = new Walk();
         }
 
-        [Test]
-        public void WalkMustOnlyLast10Minutes()
+        [TestCase(new[] { 'w', 's', 'e', 'e', 'n', 'n', 'e', 's', 'w', 'w' }, "true")]
+        [TestCase(new[] { 's', 'e', 'e', 'n', 'n', 'e', 's', 'w', 'w' }, "false")]
+        [TestCase(new[] { 'w', 's', 'e', 'n', 'n', 'e', 's', 'w', 'w', 'w' }, "false")]
+        [TestCase(new[] { 'w', 's' }, "false")]
+
+
+        public void TenMinuteWalkMustReturnToDestination(char[] route, string expected)
         {
-            string actual = walk.Walking(new[] { 'w', 's', 'e', 'e', 'n', 'n', 'e', 's', 'w', 'w' });
-            string expected = "true";
-            Assert.AreEqual(actual, expected);
-
-        }
-
-        [Test]
-        public void WillReturnFalseIfLessThan10Minutes()
-        {
-            string actual = walk.Walking(new[] { 's', 'e', 'e', 'n', 'n', 'e', 's', 'w', 'w' });
-            string expected = "false";
-            Assert.AreEqual(actual, expected);
-
-        }
-
-        [Test]
-        public void WalkMustReturnUserToDestination()
-        {
-            string actual = walk.Walking(new[] { 'w', 's', 'e', 'n', 'n', 'e', 's', 'w', 'w', 'w' });
-            string expected = "false";
-            Assert.AreEqual(actual, expected);
+            string actual = walk.Walking(route);
+            Assert.AreEqual(expected, actual);
         }
     }
 }
