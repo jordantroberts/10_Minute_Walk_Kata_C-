@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace TenMinWalk
 {
@@ -11,10 +12,15 @@ namespace TenMinWalk
 
         public string Walking(char[] newWalk)
         {
-            if (newWalk.Length == 10)
+            var NSMatch = newWalk.Count(direction => direction == 'n') == newWalk.Count(direction => direction == 's');
+            var EWMatch = newWalk.Count(direction => direction == 'w') == newWalk.Count(direction => direction == 'e');
+            {
+                if (newWalk.Length == 10 && NSMatch && EWMatch)
             {
                 return "true";
             }
+            }
+
             return "false";
         }
 
